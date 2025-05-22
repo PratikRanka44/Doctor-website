@@ -23,7 +23,7 @@
                               <center>    <h5 class="card-title">{{ post.title }}</h5> </center> 
                               {# In patient_blog_list.html #}
                               <center>    <p class="card-text text-muted small">By <b> {{ post.author.get_full_name|default:post.author.email }} </b> on {{ post.published_at|date:"F d, Y" }}</p> </center> 
-                              <center>    <p class="card-text">{{ post.get_truncated_summary }}</p> </center> 
+                             <br> <center>    <p class="card-text">{{ post.get_truncated_summary }}</p> </center> 
                                 <a href="{% url 'patient_blog_detail' post.pk %}" class="btn btn-primary mt-auto">Read More</a>
                             </div>
                         </div>
