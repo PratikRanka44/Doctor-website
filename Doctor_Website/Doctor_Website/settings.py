@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website'
 ]
-
+AUTH_USER_MODEL = 'website.UserRegistration'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,8 +77,15 @@ WSGI_APPLICATION = 'Doctor_Website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'myhealthfirst_db',       # Your database name
+        'USER': 'root',          # Your MySQL username
+        'PASSWORD': 'laptop', # Your MySQL password
+        'HOST': '127.0.0.1',            # Or your MySQL server IP
+        'PORT': '3306',                 # Default MySQL port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
@@ -135,3 +142,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'website/media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom settings for authentication URLs
+LOGIN_URL = '/login/'  # This tells Django where your login page is located
+LOGIN_REDIRECT_URL = '/doctor_dashboard/' # Optional: Where to go after successful login by default
+LOGOUT_REDIRECT_URL = '/login/' # Optional: Where to go after logout by default

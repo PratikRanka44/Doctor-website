@@ -1,0 +1,38 @@
+{% extends 'patient_dashboard.html' %} {# <-- EXTENDS YOUR DASHBOARD HTML #}
+{% load static %}
+
+{% block title %}{{ blog_post.title }}{% endblock %} {# Sets the title for this page #}
+
+{% block patient_content %} {# <-- CONTENT GOES INTO THIS BLOCK #}
+<div class="container-fluid animated" style="animation-delay: 0.3s;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light p-3 rounded">
+            <li class="breadcrumb-item"><a href="{% url 'patient_blog_list' %}">Blog Posts</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ blog_post.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="card my-4">
+        {% if blog_post.image %}
+            <img src="{{ blog_post.image.url }}" class="card-img-top" alt="{{ blog_post.title }}" style="max-height: 400px; object-fit: cover;">
+        {% else %}
+            {# Ensure you have a default image at this static path #}
+            <img src="{% static 'images/default_blog_image.jpg' %}" class="card-img-top" alt="Default Blog Image" style="max-height: 400px; object-fit: cover;">
+        {% endif %} <br>
+        <div class="card-body">
+            <h1 class="card-title">{{ blog_post.title }}</h1>
+           {# In patient_blog_detail.html #}
+<p class="card-subtitle mb-2 text-muted">
+    By <span class="fw-bold">{{ blog_post.author.get_full_name|default:blog_post.author.email }}</span>
+    in <span class="badge bg-primary">{{ blog_post.category.name|default:'Uncategorized' }}</span>
+    on <span class="fw-bold">{{ blog_post.published_at|date:"F d, Y \a\t H:i" }}</span>
+</p>
+            <hr>
+            <div class="card-text blog-content">
+                {{ blog_post.content|safe }}
+            </div>
+            <a href="{% url 'patient_blog_list' %}" class="btn btn-secondary mt-4"><i class="fas fa-arrow-left me-2"></i>Back to Blog Posts</a>
+        </div>
+    </div>
+</div>
+{% endblock patient_content %} {# <-- END OF BLOCK #}

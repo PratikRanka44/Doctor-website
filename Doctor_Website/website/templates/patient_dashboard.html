@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard</title>
-    
-    <!-- Bootstrap 5 CDN -->
+    <title>{% block title %}Patient Dashboard{% endblock %}</title> {# <-- ADDED BLOCK HERE #}
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
+        /* Your existing CSS here */
         :root {
             --primary-color: #4361ee;
             --secondary-color: #3f37c9;
@@ -26,7 +24,7 @@
             --warning-color: #ffd166;
             --info-color: #118ab2;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f7fb;
@@ -34,26 +32,26 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .navbar {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             color: white !important;
         }
-        
+
         .nav-link {
             color: rgba(255, 255, 255, 0.85) !important;
             transition: all 0.3s ease;
         }
-        
+
         .nav-link:hover {
             color: white !important;
         }
-        
+
         .sidebar {
             background-color: white;
             height: calc(100vh - 56px);
@@ -65,7 +63,7 @@
             transition: all 0.3s ease;
             z-index: 999;
         }
-        
+
         .sidebar-sticky {
             position: sticky;
             top: 0;
@@ -74,37 +72,37 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
-        
+
         .sidebar .nav-link {
             color: #495057 !important;
             padding: 12px 20px;
             font-weight: 500;
             border-left: 4px solid transparent;
         }
-        
+
         .sidebar .nav-link i {
             margin-right: 10px;
             width: 20px;
             text-align: center;
         }
-        
+
         .sidebar .nav-link:hover {
             background-color: #f8f9fa;
             border-left: 4px solid var(--primary-color);
         }
-        
+
         .sidebar .active {
             color: var(--primary-color) !important;
             background-color: rgba(67, 97, 238, 0.1);
             border-left: 4px solid var(--primary-color);
         }
-        
+
         .main-content {
             margin-left: 250px;
             padding: 20px;
             transition: all 0.3s ease;
         }
-        
+
         .card {
             border: none;
             border-radius: 10px;
@@ -112,19 +110,19 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 20px;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .profile-header {
             background: linear-gradient(135deg, #f6f9fc, #edf2fb);
             border-radius: 10px;
             padding: 30px;
             margin-bottom: 20px;
         }
-        
+
         .profile-pic {
             width: 120px;
             height: 120px;
@@ -134,11 +132,11 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .profile-pic:hover {
             transform: scale(1.05);
         }
-        
+
         .profile-pic-placeholder {
             width: 120px;
             height: 120px;
@@ -152,14 +150,14 @@
             border: 5px solid white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .user-name {
             font-size: 1.8rem;
             font-weight: 600;
             margin: 10px 0 5px;
             color: #212529;
         }
-        
+
         .user-role {
             display: inline-block;
             background-color: var(--primary-color);
@@ -170,17 +168,17 @@
             font-weight: 500;
             margin-bottom: 15px;
         }
-        
+
         .user-info {
             margin-top: 15px;
         }
-        
+
         .info-item {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
-        
+
         .info-item i {
             width: 30px;
             height: 30px;
@@ -192,7 +190,7 @@
             border-radius: 50%;
             margin-right: 10px;
         }
-        
+
         .stat-card {
             background-color: white;
             border-radius: 10px;
@@ -200,7 +198,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .stat-icon {
             width: 50px;
             height: 50px;
@@ -212,19 +210,19 @@
             color: white;
             margin-bottom: 15px;
         }
-        
+
         .stat-details h3 {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 5px;
         }
-        
+
         .stat-details p {
             margin: 0;
             color: #6c757d;
             font-weight: 500;
         }
-        
+
         .bg-pattern {
             position: absolute;
             right: -20px;
@@ -234,13 +232,13 @@
             opacity: 0.1;
             transform: rotate(30deg);
         }
-        
+
         .recent-activity {
             list-style: none;
             padding: 0;
             position: relative;
         }
-        
+
         .recent-activity:before {
             content: '';
             position: absolute;
@@ -250,17 +248,17 @@
             width: 2px;
             background-color: #e9ecef;
         }
-        
+
         .recent-activity li {
             position: relative;
             padding-left: 30px;
             margin-bottom: 20px;
         }
-        
+
         .recent-activity li:last-child {
             margin-bottom: 0;
         }
-        
+
         .activity-icon {
             position: absolute;
             left: 0;
@@ -272,23 +270,23 @@
             background-color: var(--primary-color);
             z-index: 1;
         }
-        
+
         .activity-content {
             background-color: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
         }
-        
+
         .activity-time {
             font-size: 0.85rem;
             color: #6c757d;
         }
-        
+
         .appointments-table th {
             font-weight: 500;
             background-color: #f8f9fa;
         }
-        
+
         .status-badge {
             display: inline-block;
             padding: 5px 10px;
@@ -296,7 +294,7 @@
             font-size: 0.75rem;
             font-weight: 500;
         }
-        
+
         .logout-btn {
             display: flex;
             align-items: center;
@@ -307,29 +305,29 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-        
+
         .logout-btn:hover {
             background-color: #dc3545;
             color: white;
         }
-        
+
         .logout-btn i {
             margin-right: 10px;
         }
-        
+
         .theme-switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 24px;
         }
-        
+
         .theme-switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -341,7 +339,7 @@
             transition: .4s;
             border-radius: 24px;
         }
-        
+
         .slider:before {
             position: absolute;
             content: "";
@@ -353,93 +351,93 @@
             transition: .4s;
             border-radius: 50%;
         }
-        
+
         input:checked + .slider {
             background-color: var(--primary-color);
         }
-        
+
         input:checked + .slider:before {
             transform: translateX(26px);
         }
-        
+
         /* Responsive */
         @media (max-width: 992px) {
             .sidebar {
                 width: 0;
                 padding: 0;
             }
-            
+
             .main-content {
                 margin-left: 0;
             }
-            
+
             .sidebar.show {
                 width: 250px;
                 padding: 15px;
             }
         }
-        
+
         /* Dark Mode */
         body.dark-mode {
             background-color: #121212;
             color: #e0e0e0;
         }
-        
+
         body.dark-mode .sidebar,
         body.dark-mode .card,
         body.dark-mode .stat-card {
             background-color: #1e1e1e;
             color: #e0e0e0;
         }
-        
+
         body.dark-mode .sidebar .nav-link {
             color: #e0e0e0 !important;
         }
-        
+
         body.dark-mode .sidebar .nav-link:hover {
             background-color: #2d2d2d;
         }
-        
+
         body.dark-mode .profile-header {
             background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
         }
-        
+
         body.dark-mode .user-name {
             color: #e0e0e0;
         }
-        
+
         body.dark-mode .activity-content {
             background-color: #2d2d2d;
         }
-        
+
         body.dark-mode .appointments-table th {
             background-color: #2d2d2d;
         }
-        
+
         body.dark-mode .table {
             color: #e0e0e0;
         }
-        
+
         body.dark-mode .logout-btn {
             background-color: #2d2d2d;
         }
-        
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .animated {
             animation: fadeIn 0.5s ease forwards;
         }
         #color{
             color:red;
         }
+        
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
@@ -454,7 +452,6 @@
         </div>
     </nav>
 
-    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
@@ -462,6 +459,12 @@
                     <a class="nav-link active" href="#">
                         <i class="fas fa-home"></i>
                         Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'patient_blog_list' %}"> {# New Blog link #}
+                        <i class="fas fa-blog"></i>
+                        Blog Posts
                     </a>
                 </li>
                 <li class="nav-item">
@@ -516,10 +519,9 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <div class="container-fluid">
-            <!-- Profile Header -->
+            {% block patient_content %} {# <-- NEW BLOCK ADDED HERE #}
             <div class="row animated" style="animation-delay: 0.1s;">
                 <div class="col-12">
                     <div class="profile-header">
@@ -536,7 +538,7 @@
                             <div class="col">
                                 <h2 class="user-name">{{ user_profile.fname }} {{ user_profile.lname }}</h2>
                                 <span class="user-role">{{ user_profile.get_role_display }}</span>
-                                
+
                                 <div class="user-info">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -562,8 +564,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Stats Row -->
+
             <div class="row animated" style="animation-delay: 0.2s;">
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
@@ -630,6 +631,52 @@
                     </div>
                 </div>
             </div>
-            
-        </body>
-        </html>
+            {% endblock patient_content %} {# <-- END OF NEW BLOCK #}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Your existing JavaScript for sidebar toggling, dark mode etc.
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggler = document.getElementById('sidebar-toggler');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            if (sidebarToggler) {
+                sidebarToggler.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    if (sidebar.classList.contains('show')) {
+                        mainContent.style.marginLeft = '250px';
+                    } else {
+                        mainContent.style.marginLeft = '0';
+                    }
+                });
+            }
+
+            // Optional: Close sidebar when clicking outside on smaller screens
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 992 && sidebar.classList.contains('show') &&
+                    !sidebar.contains(event.target) && !sidebarToggler.contains(event.target)) {
+                    sidebar.classList.remove('show');
+                    mainContent.style.marginLeft = '0';
+                }
+            });
+
+            // Theme switch logic (if you implement it)
+            const themeSwitch = document.getElementById('theme-switch');
+            if (themeSwitch) {
+                themeSwitch.addEventListener('change', function() {
+                    document.body.classList.toggle('dark-mode', this.checked);
+                    localStorage.setItem('dark-mode', this.checked);
+                });
+                // Apply saved theme on load
+                if (localStorage.getItem('dark-mode') === 'true') {
+                    document.body.classList.add('dark-mode');
+                    themeSwitch.checked = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

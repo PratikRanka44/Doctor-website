@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog Posts - MyHealthFirst</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        .btn {
+    border: none;
+    padding: 10px 44px 16px 39px;
+    text-transform: capitalize;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    background-size: 200%;
+    transition: 0.6s;
+    box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12);
+    background-image: linear-gradient(to left, #559af3, #1462f3, #559af3);
+}
+        .header-area .main-header {
+            padding: 12px 25px;
+        }
+        .logo {
+            font-size: 27px;
+            color: #283593;
+        }
+        #gradient-background {
+            background: linear-gradient(-45deg,rgb(211, 164, 150),rgb(209, 141, 167),rgb(133, 182, 200),rgb(151, 215, 200));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f39c12;
+            --background-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Particles background */
+        }
+
+        .header-area {
+            position: relative; /* Essential for z-index to work */
+            z-index: 10; /* Make sure header is above particles */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 100px auto 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(112, 59, 59, 0.5); /* Adjusted rgba for clarity */
+            position: relative;
+            z-index: 2; /* Content above particles */
+            backdrop-filter: blur(10px);
+        }
+
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .messages li {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .messages .error {
+            background-color: rgba(var(--error-color), 0.1);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+
+        .messages .success {
+            background-color: rgba(var(--success-color), 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 200px; /* Fixed height for consistent image display */
+            object-fit: cover; /* Ensures image covers the area without distortion */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 80px 1rem 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-area">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-2 col-md-1">
+                        <b> <div class="logo">
+                            <a href="" class="logo"><i class="fas fa-heartbeat"></i>MyHealthFirst</a></b>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10">
+                        <div class="menu-main d-flex align-items-center justify-content-end">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url 'doctor_dashboard' %}">Dashboard</a></li> {# Link to doctor dashboard #}
+                                        <li><a href="{% url 'doctor_my_blogs' %}">My Blogs</a></li>
+                                        <li><a href="{% url 'doctor_create_blog_post' %}">Create Blog</a></li>
+                                        <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                                        </ul>
+                                </nav>
+                            </div>
+                            <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                {% if request.session.user_id %}
+                                    <a href="{% url 'logout_view' %}" class="btn header-btn">Logout</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="particles-js"></div> {# This div is for particles.js background #}
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">My Blog Posts</h1>
+
+        {# Display messages #}
+        {% if messages %}
+            <ul class="messages list-unstyled text-center">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+{% if my_posts %}
+    <div class="row">
+        {% for post in my_posts %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+                {% else %}
+                    <img src="{% static 'assets/img/default_blog_image.jpg' %}" class="card-img-top" alt="Default Blog Image">
+                {% endif %}
+               <div class="card-body">
+   <center>  <h5 class="card-title">{{ post.title }}</h5> </center>
+    <center> <p class="card-text text-muted small">Category: {{ post.category.name }}</p> </center>
+    <center> <p class="card-text text-muted small">Status: {% if post.is_draft %}Draft{% else %}Published{% endif %}</p> </center>
+    <center> <p class="card-text">{{ post.get_truncated_summary }}</p> </center>
+             <br>
+    {# Use d-flex to nicely space out the buttons #}
+    <div >
+        {# Edit Button #}
+       <a href="{% url 'doctor_edit_blog_post' pk=post.pk %}" class="btn btn-sm btn-info">Edit</a> 
+
+        {# Delete Button (as a POST form with confirmation) #}
+        <form action="{% url 'doctor_delete_blog_post' pk=post.pk %}" method="post" style="display:inline;"
+              onsubmit="return confirm('Are you sure you want to delete the blog post titled \'{{ post.title }}\'? This action cannot be undone.');">
+            {% csrf_token %} {# Essential for POST requests in Django #}
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+                <div class="card-footer text-muted small">
+                    Posted: {{ post.published_at|date:"M d, Y" }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">You haven't created any blog posts yet. <a href="{% url 'doctor_create_blog_post' %}">Create one now!</a></p>
+        {% endif %}
+    </div>
+
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#4a90e2' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#4a90e2',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+            },
+            retina_detect: true
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
